@@ -47,12 +47,13 @@ export default function InvitationCard() {
         {/* Invitation Card */}
         <div className="invitation-card opacity-0 max-w-2xl mx-auto">
           <div className="glass-card rounded-2xl p-4 md:p-6 hover:border-gold/40 transition-all duration-500 group">
-            <div className="rounded-xl overflow-hidden shadow-2xl shadow-black/30">
-              <img
-                src="/images/invitation.png"
-                alt="Dinesh & Subhikshaa Wedding Invitation"
-                className="w-full h-auto group-hover:scale-[1.01] transition-transform duration-700"
+            <div className="rounded-xl overflow-hidden shadow-2xl shadow-black/30 relative h-[400px] md:h-[600px] bg-white group-hover:scale-[1.01] transition-transform duration-700">
+              <iframe
+                src="/invitation.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
+                title="Wedding Invitation Preview"
+                className="w-full h-full blur-[6px] pointer-events-none opacity-90 border-0"
               />
+              <div className="absolute inset-0 bg-charcoal/10 pointer-events-none" />
             </div>
             
             {/* Download Button */}

@@ -103,9 +103,8 @@ export default function Hero() {
           <div className="flex items-start gap-3 mb-4">
             <div className="w-px h-12 bg-gold/40 mt-1 flex-shrink-0" />
             <p className="text-white/60 font-body text-sm leading-relaxed">
-              Thalapathy Arivaalayam - DMK District Headquarter,<br />
-              Public Office Rd, South Palpannaicherry, Kadambadi,<br />
-              Nagapattinam, Tamil Nadu 611003
+              Thalapathi Arivalayam, Near Valivalam Desigar Polytechnic College,<br />
+              Velippalayam, Nagapattinam.
             </p>
           </div>
           <a
