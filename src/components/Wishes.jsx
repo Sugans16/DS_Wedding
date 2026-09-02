@@ -164,7 +164,6 @@ export default function Wishes() {
                   key={wish.id}
                   className="w-full h-full flex-shrink-0 flex items-center justify-center py-4 cursor-default"
                   onDoubleClick={() => handleDeleteWish(wish.id)}
-                  title="Double click to delete (Admin only)"
                 >
                   <div className="wish-card px-6 py-5 md:px-8 md:py-6 w-full shadow-xl">
                     <div className="flex items-start gap-3">
