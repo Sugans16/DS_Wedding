@@ -51,7 +51,7 @@ export default function InvitationCard() {
               <iframe
                 src="/invitation.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
                 title="Wedding Invitation Preview"
-                className="w-full h-full blur-[6px] pointer-events-none opacity-90 border-0"
+                className="w-full h-full blur-[2px] pointer-events-none opacity-90 border-0"
               />
               <div className="absolute inset-0 bg-charcoal/10 pointer-events-none" />
             </div>
