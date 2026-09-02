@@ -30,8 +30,8 @@ export default function Events() {
       year: '2026',
       title: 'Wedding Ceremony',
       time: '9:00 AM – 10:30 AM',
-      venue: 'Thalapathy Arivaalayam',
-      address: 'DMK District Headquarter, Public Office Rd, South Palpannaicherry, Kadambadi, Nagapattinam, Tamil Nadu 611003',
+      venue: 'Thalapathi Arivalayam',
+      address: 'Near Valivalam Desigar Polytechnic College, Velippalayam, Nagapattinam',
       mapQuery: 'Thalapathy+Arivaalayam+DMK+District+Headquarter+Nagapattinam+Tamil+Nadu+611003',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

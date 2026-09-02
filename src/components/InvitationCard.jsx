@@ -25,8 +25,8 @@ export default function InvitationCard() {
   const handleDownload = () => {
     // Try to download the PDF first; fall back to the invitation image
     const link = document.createElement('a')
-    link.href = '/images/invitation.png'
-    link.download = 'Dinesh_Subhikshaa_Wedding_Invitation.png'
+    link.href = '/invitation.pdf'
+    link.download = 'Dinesh_Subhikshaa_Wedding_Invitation.pdf'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
