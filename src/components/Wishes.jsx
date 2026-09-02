@@ -82,6 +82,17 @@ export default function Wishes() {
     setShowModal(false)
   }
 
+  const handleDeleteWish = (id) => {
+    const code = window.prompt("Enter admin code to delete wish:")
+    if (code === "DineshSubhiMarriage") {
+      setWishes((prev) => prev.filter(wish => wish.id !== id))
+      // Adjust active index to prevent empty space if last item is deleted
+      setActiveIndex((prev) => (prev >= wishes.length - 1 ? Math.max(0, wishes.length - 2) : prev))
+    } else if (code !== null) {
+      window.location.reload()
+    }
+  }
+
   return (
     <section id="wishes" className="py-20 md:py-32 bg-charcoal-light relative" ref={sectionRef}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
@@ -104,7 +115,9 @@ export default function Wishes() {
               {wishes.map((wish, index) => (
                 <div
                   key={wish.id}
-                  className="w-full h-full flex-shrink-0 flex items-center justify-center py-4"
+                  className="w-full h-full flex-shrink-0 flex items-center justify-center py-4 cursor-default"
+                  onDoubleClick={() => handleDeleteWish(wish.id)}
+                  title="Double click to delete (Admin only)"
                 >
                   <div className="wish-card px-6 py-5 md:px-8 md:py-6 w-full shadow-xl">
                     <div className="flex items-start gap-3">
