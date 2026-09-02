@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { db } from '../firebase'
+import { collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc } from 'firebase/firestore'
 
 const DEFAULT_WISHES = [
   {
@@ -13,8 +15,11 @@ const EMOJIS = ['💐', '🎉', '💕', '✨', '🥂', '💝', '🌸', '🎊', '
 
 export default function Wishes() {
   const [wishes, setWishes] = useState(() => {
-    const saved = localStorage.getItem('wedding-wishes-dinesh-subhi')
-    return saved ? JSON.parse(saved) : DEFAULT_WISHES
+    if (!db) {
+      const saved = localStorage.getItem('wedding-wishes-dinesh-subhi')
+      return saved ? JSON.parse(saved) : DEFAULT_WISHES
+    }
+    return DEFAULT_WISHES
   })
   const [showModal, setShowModal] = useState(false)
   const [name, setName] = useState('')
@@ -41,8 +46,29 @@ export default function Wishes() {
     return () => clearInterval(interval)
   }, [wishes.length, nextSlide])
 
+  // Firebase Real-time Listener
   useEffect(() => {
-    localStorage.setItem('wedding-wishes-dinesh-subhi', JSON.stringify(wishes))
+    if (!db) return;
+    
+    const q = query(collection(db, 'wishes'), orderBy('timestamp', 'asc'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const firebaseWishes = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      if (firebaseWishes.length > 0) {
+        setWishes(firebaseWishes);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // LocalStorage fallback sync (only if Firebase is not active)
+  useEffect(() => {
+    if (!db) {
+      localStorage.setItem('wedding-wishes-dinesh-subhi', JSON.stringify(wishes))
+    }
   }, [wishes])
 
   useEffect(() => {
@@ -64,30 +90,51 @@ export default function Wishes() {
     return () => observer.disconnect()
   }, [wishes])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!name.trim() || !message.trim()) return
 
     const cardEmojis = ['💐', '🎉', '💕', '✨', '🥂', '💝', '🌸', '🎊']
-    const newWish = {
-      id: Date.now(),
+    const selectedCardEmoji = cardEmojis[Math.floor(Math.random() * cardEmojis.length)];
+    
+    const newWishData = {
       name: name.trim(),
       message: message.trim(),
-      emoji: cardEmojis[Math.floor(Math.random() * cardEmojis.length)],
+      emoji: selectedCardEmoji,
+      timestamp: Date.now()
+    };
+
+    if (db) {
+      try {
+        await addDoc(collection(db, 'wishes'), newWishData);
+      } catch (error) {
+        console.error("Error adding wish: ", error);
+        alert("Could not send wish. Please try again.");
+        return;
+      }
+    } else {
+      setWishes((prev) => [...prev, { id: Date.now(), ...newWishData }]);
     }
 
-    setWishes((prev) => [...prev, newWish])
     setName('')
     setMessage('')
     setShowModal(false)
   }
 
-  const handleDeleteWish = (id) => {
+  const handleDeleteWish = async (id) => {
     const code = window.prompt("Enter admin code to delete wish:")
     if (code === "DineshSubhiMarriage") {
-      setWishes((prev) => prev.filter(wish => wish.id !== id))
-      // Adjust active index to prevent empty space if last item is deleted
-      setActiveIndex((prev) => (prev >= wishes.length - 1 ? Math.max(0, wishes.length - 2) : prev))
+      if (db) {
+        try {
+          await deleteDoc(doc(db, 'wishes', id));
+          setActiveIndex((prev) => (prev >= wishes.length - 1 ? Math.max(0, wishes.length - 2) : prev))
+        } catch (error) {
+          console.error("Error deleting wish:", error);
+        }
+      } else {
+        setWishes((prev) => prev.filter(wish => wish.id !== id))
+        setActiveIndex((prev) => (prev >= wishes.length - 1 ? Math.max(0, wishes.length - 2) : prev))
+      }
     } else if (code !== null) {
       window.location.reload()
     }
