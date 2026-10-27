@@ -125,9 +125,9 @@ export default function Hero() {
       {/* Right Image */}
       <div className="w-full lg:w-1/2 h-[60vh] lg:h-screen relative image-overlay">
         <img
-          src="/images/couple-1.png"
-          alt="Dinesh and Subhikshaa - Beach Sunset"
-          className="w-full h-full object-cover object-top"
+          src="/images/couple-1.jpg"
+          alt="Dinesh and Subhikshaa"
+          className="w-full h-full object-cover object-center"
         />
       </div>
     </section>

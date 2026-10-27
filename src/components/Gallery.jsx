@@ -1,12 +1,18 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 
 const ALL_IMAGES = [
-  { src: '/images/couple-1.png', alt: 'Dinesh & Subhikshaa - Beach Sunset' },
-  { src: '/images/couple-2.png', alt: 'Dinesh & Subhikshaa - Village Scene' },
-  { src: '/images/couple-3.png', alt: 'Dinesh & Subhikshaa - Rainy Evening' },
-  { src: '/images/couple-4.png', alt: 'Dinesh & Subhikshaa - Coffee Shop' },
-  { src: '/images/couple-5.png', alt: 'Dinesh & Subhikshaa - Beach Portrait' },
-  { src: '/images/couple-6.png', alt: 'Dinesh & Subhikshaa - Temple Wedding' },
+  { src: '/images/couple-1.jpg', alt: 'Dinesh & Subhikshaa - A Sweet Promise' },
+  { src: '/images/couple-2.jpg', alt: 'Dinesh & Subhikshaa - Forever by Your Side' },
+  { src: '/images/couple-3.jpg', alt: 'Dinesh & Subhikshaa - Gentle Waves & Warm Embrace' },
+  { src: '/images/couple-4.jpg', alt: 'Dinesh & Subhikshaa - Endless Smiles' },
+  { src: '/images/couple-5.jpg', alt: 'Dinesh & Subhikshaa - Serenity by the Palms' },
+  { src: '/images/couple-6.jpg', alt: 'Dinesh & Subhikshaa - Hand in Hand' },
+  { src: '/images/couple-7.jpg', alt: 'Dinesh & Subhikshaa - Joyful Village Ride' },
+  { src: '/images/couple-8.jpg', alt: 'Dinesh & Subhikshaa - Traditional Grace' },
+  { src: '/images/couple-9.jpg', alt: 'Dinesh & Subhikshaa - In Love with the Moment' },
+  { src: '/images/couple-10.jpg', alt: 'Dinesh & Subhikshaa - Strolling Through Nature' },
+  { src: '/images/couple-11.jpg', alt: 'Dinesh & Subhikshaa - Whispers of Love' },
+  { src: '/images/couple-12.jpg', alt: 'Dinesh & Subhikshaa - Together on Every Path' },
 ]
 
 export default function Gallery() {
