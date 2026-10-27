@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import heroImage from '../assets/gallery/0Y1A1024.jpg'
 
 export default function Hero() {
   const weddingDate = new Date('2026-10-30T09:00:00+05:30')
@@ -125,7 +126,7 @@ export default function Hero() {
       {/* Right Image */}
       <div className="w-full lg:w-1/2 h-[60vh] lg:h-screen relative image-overlay">
         <img
-          src="/images/couple-1.jpg"
+          src={heroImage}
           alt="Dinesh and Subhikshaa"
           className="w-full h-full object-cover object-center"
         />
